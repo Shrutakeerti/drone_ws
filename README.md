@@ -1,4 +1,4 @@
-# Omokai Robotics Take-Home (Drone) — Prompt → LLM → Validated Mission JSON → Deterministic Executor → PX4 SITL
+# Omokai Robotics — Prompt → LLM → Validated Mission JSON → Deterministic Executor → PX4 SITL
 
 
 
