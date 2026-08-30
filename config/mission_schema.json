@@ -1,0 +1,68 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "DroneMissionPlan",
+  "description": "Structured, executor-facing representation of an operator command for a MAVSDK/PX4 drone. The LLM must emit ONLY an object matching this schema. Nothing outside this schema is trusted.",
+  "type": "object",
+  "required": ["mission_type", "pattern", "loops", "speed_mps", "altitude_m"],
+  "additionalProperties": false,
+  "properties": {
+    "mission_type": {
+      "type": "string",
+      "enum": ["patrol", "route", "go_to_point"],
+      "description": "patrol = repeat a closed shape N times; route = one-shot list of waypoints; go_to_point = single destination"
+    },
+    "pattern": {
+      "type": "string",
+      "enum": ["square", "circle", "perimeter", "waypoints"],
+      "description": "How to generate the horizontal geometry. 'waypoints' means use the explicit waypoints list."
+    },
+    "loops": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 10
+    },
+    "speed_mps": {
+      "type": "number",
+      "minimum": 0.5,
+      "maximum": 5.0,
+      "description": "Horizontal cruise speed. Hard-capped by the validator regardless of LLM proposal."
+    },
+    "altitude_m": {
+      "type": "number",
+      "minimum": 2.0,
+      "maximum": 20.0,
+      "description": "Constant relative altitude (AGL) the whole mission flies at."
+    },
+    "size_m": {
+      "type": "number",
+      "minimum": 2.0,
+      "maximum": 20.0,
+      "description": "Side length for 'square' or 'perimeter' patterns."
+    },
+    "radius_m": {
+      "type": "number",
+      "minimum": 2.0,
+      "maximum": 20.0,
+      "description": "Radius for 'circle' pattern."
+    },
+    "waypoints": {
+      "type": "array",
+      "maxItems": 20,
+      "items": {
+        "type": "array",
+        "minItems": 2,
+        "maxItems": 2,
+        "items": {"type": "number"}
+      },
+      "description": "Explicit [north_m, east_m] points relative to the takeoff point (local NED), used when pattern == 'waypoints'."
+    },
+    "return_to_start": {
+      "type": "boolean",
+      "default": true
+    },
+    "notes": {
+      "type": "string",
+      "description": "Free-text LLM rationale, never executed, only logged."
+    }
+  }
+}
