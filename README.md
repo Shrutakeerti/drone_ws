@@ -1,5 +1,11 @@
 # Omokai Robotics Take-Home (Drone) — Prompt → LLM → Validated Mission JSON → Deterministic Executor → PX4 SITL
 
+
+
+## Demo
+https://github.com/Shrutakeerti/drone_ws/issues/1#issue-5291712688
+
+
 ## 1. What this is
 
 A drone pipeline, using MAVSDK-Python against PX4 SITL, that turns a
