@@ -1,4 +1,4 @@
-# Omokai Robotics — Prompt → LLM → Validated Mission JSON → Deterministic Executor → PX4 SITL
+# yo yo — Prompt → LLM → Validated Mission JSON → Deterministic Executor → PX4 SITL
 
 
 
